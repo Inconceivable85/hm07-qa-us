@@ -1,4 +1,3 @@
-
 // testing 201 response against api/v1/orders with multiple duplicate item id's
 const config = require('../config');
 
@@ -73,3 +72,38 @@ test('Status code should be 409', async () => {
 	expect(actualStatusCode).toBe(409);
 });
 
+// new 500
+//NEGATIVE TESTING testing 500 for order without available warehouse
+const requestBody3 = {
+	"productsList": [
+		{
+		  "id": 5,
+		  "quantity": 1
+		},
+		{
+		  "id": 16,
+		  "quantity": 2
+		},
+		{
+		  "id": 18,
+		  "quantity": 1
+		}
+	  ]
+}
+
+test('Status code should be 409', async () => {
+	let actualStatusCode;
+	try {
+		const response = await fetch(`${config.API_URL}/api/v1/orders`, {
+			method: 'POST',
+			headers: {
+			'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(requestBody3)
+		});
+		actualStatusCode = response.status;
+	} catch (error) {
+		console.error(error);
+	}
+	expect(actualStatusCode).toBe(409);
+});
