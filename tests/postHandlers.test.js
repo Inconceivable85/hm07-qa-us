@@ -91,6 +91,7 @@ const requestBody3 = {
 	  ]
 }
 
+//testing POST response expected 409 /api/v1/orders
 test('Status code should be 409', async () => {
 	let actualStatusCode;
 	try {
@@ -107,3 +108,37 @@ test('Status code should be 409', async () => {
 	}
 	expect(actualStatusCode).toBe(409);
 });
+
+//TEST NOT PROVEN BELOW
+
+//TEST NOT PROVEN ABOVE
+
+
+const requestBody4 = {
+	"products": [
+	  {
+		"id": 1,
+		"quantity": 2
+	  }
+	]
+  }
+test('Response body should contain...', async () => {
+	let actualResponseBody;
+	try {
+		const response = await fetch(`${config.API_URL}/api/v1/warehouses/check`, {
+			method: 'POST',
+			headers: {
+			'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(requestBody4)
+		});
+		actualResponseBody = await response.json();
+	} catch (error) {
+		console.error(error);
+	}
+	expect(actualResponseBody["Everything You Need"]["Orange Juice - Cold-Pressed, No Added Sugar, Preservative Free"]).toBe(false);
+});
+//{
+//   "Everything You Need": {
+//     "Orange Juice - Cold-Pressed, No Added Sugar, Preservative Free": false
+//   },
