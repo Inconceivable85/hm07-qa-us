@@ -1,4 +1,4 @@
-// TESTING STATUS CODE 200
+// TESTING STATUS CODE 200 on /api/v1/kits/7 -KIT NAME "PROJECT7"
 const config = require('../config');
 
 const requestBody = {
@@ -27,7 +27,7 @@ test('Should return Status Code 200', async () => {
 	expect(actualStatusCode).toBe(200);
 });
 
-//round2
+//round2 /api/kits/7 response toBe true - KIT NAME "PROJECT7"
 test('Response body toBe true', async () => {
 	let actualResponseBody;
 	try {
